@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 class ContactForm extends Component {
+  state = {
+    name: '',
+  };
+
+  handleChange = event => {
+    this.setState({
+      name: event.currentTarget.value,
+    });
+  };
+
+  handleSubmit() {}
+
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <FormLabel>
           <FormInput
+            onChange={this.handleChange}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

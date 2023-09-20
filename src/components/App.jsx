@@ -34,7 +34,7 @@ class App extends Component {
         <ContactsContainer>
           <ContactsTitle>Contacts</ContactsTitle>
           <Filter />
-          <ContactList />
+          <ContactList contacts={this.state.contacts} />
         </ContactsContainer>
       </div>
     );
