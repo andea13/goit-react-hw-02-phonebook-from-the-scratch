@@ -29,7 +29,7 @@ class App extends Component {
       >
         <PhonebookContainer>
           <PhonebookTitle>Phonebook</PhonebookTitle>
-          <ContactForm />
+          <ContactForm contacts={this.state.contacts} />
         </PhonebookContainer>
         <ContactsContainer>
           <ContactsTitle>Contacts</ContactsTitle>

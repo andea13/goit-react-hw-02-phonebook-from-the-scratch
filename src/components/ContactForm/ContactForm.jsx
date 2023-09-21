@@ -11,7 +11,31 @@ class ContactForm extends Component {
     });
   };
 
-  handleSubmit() {}
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log('Відбувся сабміт форми');
+    // this.setState({ name: event.target.value });
+    // console.log(this.state.name);
+    const { name } = this.state;
+
+    if (!name.trim()) {
+      alert('Please fill in all the fields');
+      return;
+    }
+    this.props.onSubmit({
+      name: name.trim(),
+      // number: number.trim(),
+    });
+
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({
+      name: '',
+      // number: '',
+    });
+  };
 
   render() {
     return (
