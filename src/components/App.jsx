@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
@@ -12,8 +13,34 @@ import {
 class App extends Component {
   state = {
     contacts: [],
-    name: '',
   };
+
+  handleSubmit = data => {
+    const { name, number } = data;
+
+    if (!name.trim() || !number.trim()) {
+      alert('Please fill in all the fields');
+      return;
+    }
+
+    const newContact = {
+      ...data,
+      id: nanoid(),
+    };
+
+    console.log(newContact);
+
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
+  // reset = () => {
+  //   this.setState({
+  //     name: '',
+  //     number: '',
+  //   });
+  // };
 
   render() {
     return (
@@ -29,7 +56,7 @@ class App extends Component {
       >
         <PhonebookContainer>
           <PhonebookTitle>Phonebook</PhonebookTitle>
-          <ContactForm contacts={this.state.contacts} />
+          <ContactForm onSubmit={this.handleSubmit} />
         </PhonebookContainer>
         <ContactsContainer>
           <ContactsTitle>Contacts</ContactsTitle>

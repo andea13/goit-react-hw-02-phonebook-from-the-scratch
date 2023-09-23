@@ -1,40 +1,30 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 class ContactForm extends Component {
   state = {
     name: '',
+    number: '',
   };
 
-  handleChange = event => {
+  id = nanoid();
+
+  handleInputChange = event => {
+    const { name, value } = event.currentTarget;
+
     this.setState({
-      name: event.currentTarget.value,
+      [name]: value,
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('Відбувся сабміт форми');
-    // this.setState({ name: event.target.value });
-    // console.log(this.state.name);
-    const { name } = this.state;
-
-    if (!name.trim()) {
-      alert('Please fill in all the fields');
-      return;
-    }
-    this.props.onSubmit({
-      name: name.trim(),
-      // number: number.trim(),
-    });
-
+    this.props.onSubmit(this.state);
     this.reset();
   };
 
   reset = () => {
-    this.setState({
-      name: '',
-      // number: '',
-    });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -42,12 +32,22 @@ class ContactForm extends Component {
       <Form onSubmit={this.handleSubmit}>
         <FormLabel>
           <FormInput
-            onChange={this.handleChange}
+            onChange={this.handleInputChange}
+            value={this.state.name}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
+          />
+        </FormLabel>
+
+        <FormLabel>
+          <FormInput
+            type="tel"
+            name="number"
+            required
+            onChange={this.handleInputChange}
           />
         </FormLabel>
         <FormButton type="submit">Add contact</FormButton>

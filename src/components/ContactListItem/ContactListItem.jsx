@@ -7,11 +7,11 @@ import {
   ContactsItemButton,
 } from './ContactListItem.styled';
 
-const ContactListItem = () => {
+const ContactListItem = ({ name, number }) => {
   return (
     <ContactsItem>
-      <ContactsItemName></ContactsItemName>
-      <ContactsItemNumber></ContactsItemNumber>
+      <ContactsItemName>{name} : </ContactsItemName>
+      <ContactsItemNumber>{number}</ContactsItemNumber>
       <ContactsItemButton type="button">Delete</ContactsItemButton>
     </ContactsItem>
   );
